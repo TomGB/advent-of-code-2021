@@ -7,3 +7,7 @@
 ## test
 
 `jest day05/test.js`
+
+## new day
+
+`cp -r dayX day05`

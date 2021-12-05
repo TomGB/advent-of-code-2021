@@ -70,15 +70,7 @@ const part2 = fileName => {
         })
     })
 
-    let moreThanTwoCount = 0
-
-    grid.map(row => {
-        row.map(item => {
-            if (item >= 2) {
-                moreThanTwoCount ++
-            }
-        })
-    })
+    const moreThanTwoCount = grid.flat().filter(x => x >= 2).length
 
     log(moreThanTwoCount)
 

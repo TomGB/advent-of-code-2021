@@ -47,7 +47,7 @@ const part2 = fileName => {
 
     const grid = Array(maxX+1).fill().map(() => Array(maxY+1).fill().map(() => 0))
 
-    const linesWithPoints = lines.map(({ x1, y1, x2, y2 }) => {
+    lines.map(({ x1, y1, x2, y2 }) => {
         let xPoints = generateRange(x1, x2)
         let yPoints = generateRange(y1, y2)
 
@@ -59,16 +59,12 @@ const part2 = fileName => {
             xPoints = Array(yPoints.length).fill(xPoints[0])
         }
 
-        return ({ xPoints, yPoints })
-    })
-
-    linesWithPoints.forEach(({ xPoints, yPoints}) => {
         xPoints.forEach((x, i) => {
             grid[x][yPoints[i]] ++
         })
     })
 
-    let moreThanTwoCount = grid.flat().filter(x => x >= 2).length
+    const moreThanTwoCount = grid.flat().filter(x => x >= 2).length
 
     log(moreThanTwoCount)
 

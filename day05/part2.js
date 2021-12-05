@@ -7,10 +7,8 @@ const log = (...x) => console.log(...x.map(item => util.inspect(item, false, nul
 const parseInput = (fileName) => {
     const input = fs.readFileSync(`${__dirname}/${fileName}.txt`, 'utf8').trim().split('\n')
     return input.map(line => {
-        const [a, b] = line.split(" -> ")
-        const [x1, y1] = a.split(',').map(x => parseInt(x))
-        const [x2, y2] = b.split(',').map(x => parseInt(x))
-
+        const regexpSize = /(\d+),(\d+) -> (\d+),(\d+)/;
+        const [_, x1, y1, x2, y2] = line.match(regexpSize).map(x => parseInt(x));
         return { x1, y1, x2, y2 }
     })
 }
@@ -70,7 +68,7 @@ const part2 = fileName => {
         })
     })
 
-    const moreThanTwoCount = grid.flat().filter(x => x >= 2).length
+    let moreThanTwoCount = grid.flat().filter(x => x >= 2).length
 
     log(moreThanTwoCount)
 

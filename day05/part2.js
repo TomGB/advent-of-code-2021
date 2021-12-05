@@ -16,9 +16,8 @@ const parseInput = (fileName) => {
 }
 
 const generateRange = (a, b) => {
-    const aIsSmall = a < b
-    const small = aIsSmall ? a : b
-    const large = aIsSmall ? b : a
+    const small = Math.min(a, b)
+    const large = Math.max(a, b)
 
     const points = []
 
@@ -26,7 +25,7 @@ const generateRange = (a, b) => {
         points.push(loc)
     }
 
-    if (!aIsSmall) {
+    if (a >= b) {
         points.reverse()
     }
 
@@ -34,25 +33,13 @@ const generateRange = (a, b) => {
 }
 
 const getMax = lines => {
-    let maxY = 0
-    let maxX = 0
+    const xVals = lines.flatMap(({ x1, x2 }) => [x1, x2])
+    const yVals = lines.flatMap(({ y1, y2 }) => [y1, y2])
 
-    lines.forEach(({ x1, y1, x2, y2 }) => {
-        if (x1 > maxX) {
-            maxX = x1
-        }
-        if (x2 > maxX) {
-            maxX = x2
-        }
-        if (y1 > maxX) {
-            maxY = y1
-        }
-        if (y2 > maxX) {
-            maxY = y2
-        }
-    })
-
-    return { maxX, maxY }
+    return {
+        maxX: Math.max(...xVals),
+        maxY: Math.max(...yVals),
+    }
 }
 
 const part2 = fileName => {

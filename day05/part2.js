@@ -15,9 +15,25 @@ const parseInput = (fileName) => {
     })
 }
 
-const part2 = fileName => {
-    const lines = parseInput(fileName)
+const generateRange = (a, b) => {
+    const aIsSmall = a < b
+    const small = aIsSmall ? a : b
+    const large = aIsSmall ? b : a
 
+    const points = []
+
+    for (let loc = small; loc <= large; loc++) {
+        points.push(loc)
+    }
+
+    if (!aIsSmall) {
+        points.reverse()
+    }
+
+    return points
+}
+
+const getMax = lines => {
     let maxY = 0
     let maxX = 0
 
@@ -36,34 +52,19 @@ const part2 = fileName => {
         }
     })
 
+    return { maxX, maxY }
+}
+
+const part2 = fileName => {
+    const lines = parseInput(fileName)
+
+    const { maxX, maxY } = getMax(lines)
+
     const grid = Array(maxX+1).fill().map(() => Array(maxY+1).fill().map(() => 0))
 
     const linesWithPoints = lines.map(({ x1, y1, x2, y2 }) => {
-        const x1IsSmall = x1 < x2
-        const y1IsSmall = y1 < y2
-        const smallX = x1IsSmall ? x1 : x2
-        const largeX = x1IsSmall ? x2 : x1
-        const smallY = y1IsSmall ? y1 : y2
-        const largeY = y1IsSmall ? y2 : y1
-
-        let xPoints = []
-        let yPoints = []
-
-        for (let xLoc = smallX; xLoc <= largeX; xLoc++) {
-            xPoints.push(xLoc)
-        }
-
-        for (let yLoc = smallY; yLoc <= largeY; yLoc++) {
-            yPoints.push(yLoc)
-        }
-
-        if (!x1IsSmall) {
-            xPoints.reverse()
-        }
-
-        if (!y1IsSmall) {
-            yPoints.reverse()
-        }
+        let xPoints = generateRange(x1, x2)
+        let yPoints = generateRange(y1, y2)
 
         if (yPoints.length === 1) {
             yPoints = Array(xPoints.length).fill(yPoints[0])

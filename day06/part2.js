@@ -1,13 +1,7 @@
 const fs = require('fs')
-const util = require('util')
-const colors = require('colors/safe')
 
-const log = (...x) => console.log(...x.map(item => util.inspect(item, false, null, true /* enable colors */)))
-
-const parseInput = (fileName) => {
-    const input = fs.readFileSync(`${__dirname}/${fileName}.txt`, 'utf8').trim().split(',').map(x => parseInt(x))
-    return input
-}
+const parseInput = (fileName) =>
+    fs.readFileSync(`${__dirname}/${fileName}.txt`, 'utf8').trim().split(',').map(x => parseInt(x))
 
 const runGeneration = fishCount => {
     const newFishCount = fishCount.shift()
@@ -19,9 +13,9 @@ const runGeneration = fishCount => {
 const run = fileName => {
     const input = parseInput(fileName)
 
-    let fishCount = Array(9).fill().map((_, i) => {
-        return input.filter(x => x === i).length
-    })
+    let fishCount = Array(9).fill().map((_, i) =>
+        input.filter(x => x === i).length
+    )
 
     const numGenerations = 256
 
@@ -29,9 +23,7 @@ const run = fileName => {
         fishCount = runGeneration(fishCount)
     }
 
-    const numFishes = fishCount.reduce((a, x) => a + x, 0)
-    log(numFishes)
-    return numFishes
+    return fishCount.reduce((a, x) => a + x, 0)
 }
 
 module.exports = {

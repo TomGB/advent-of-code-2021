@@ -1,5 +1,5 @@
-const { part1 } = require("./part1")
-const { part2 } = require("./part2")
+const { run: part1 } = require("./part1")
+const { run: part2 } = require("./part2")
 
 const [part, inputFile] = process.argv.slice(2);
 

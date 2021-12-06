@@ -9,10 +9,10 @@ const parseInput = (fileName) => {
     return input
 }
 
-const part2 = fileName => {
+const run = fileName => {
     const input = parseInput(fileName)
 }
 
 module.exports = {
-    part2,
+    run,
 }

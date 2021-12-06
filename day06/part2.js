@@ -11,15 +11,12 @@ const parseInput = (fileName) => {
 
 const runGeneration = fishCount => {
     const newFishCount = fishCount.shift()
-
     fishCount.push(newFishCount)
-
     fishCount[6] += newFishCount
-
     return fishCount
 }
 
-const part2 = fileName => {
+const run = fileName => {
     const input = parseInput(fileName)
 
     let fishCount = Array(9).fill().map((_, i) => {
@@ -33,12 +30,10 @@ const part2 = fileName => {
     }
 
     const numFishes = fishCount.reduce((a, x) => a + x, 0)
-
     log(numFishes)
-
     return numFishes
 }
 
 module.exports = {
-    part2,
+    run,
 }

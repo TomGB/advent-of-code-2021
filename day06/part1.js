@@ -19,7 +19,7 @@ const runGeneration = population => {
     })
 }
 
-const part1 = fileName => {
+const run = fileName => {
     let input = parseInput(fileName)
 
     const numGenerations = 80
@@ -34,5 +34,5 @@ const part1 = fileName => {
 }
 
 module.exports = {
-    part1,
+    run,
 }
